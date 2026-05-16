@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import AuthGateway from './pages/AuthGateway.jsx'
+import CartPage from './pages/CartPage.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import ProductDetailPage from './pages/ProductDetailPage.jsx'
@@ -18,6 +19,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/products/:productId" element={<ProductDetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
       </Route>
     </Routes>
   )
