@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
+import AuthField from '../components/auth/AuthField.jsx'
+import AuthLayout from '../components/auth/AuthLayout.jsx'
+import AuthSubmitButton from '../components/auth/AuthSubmitButton.jsx'
 import { useAuth } from '../context/useAuth.js'
 
 function LoginPage() {
@@ -41,43 +44,43 @@ function LoginPage() {
   }
 
   return (
-    <main className="app">
-      <section className="auth-panel" aria-labelledby="login-title">
-        <p className="eyebrow">Account Access</p>
-        <h1 id="login-title">Login</h1>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              autoComplete="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              autoComplete="current-password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          {error && <p className="auth-error">{error}</p>}
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Entering...' : 'Enter'}
-          </button>
-        </form>
+    <AuthLayout
+      eyebrow="Account Access"
+      title="Login"
+      titleId="login-title"
+      footer={
         <p className="auth-switch">
           New to Baldo? <Link to="/register">Create account</Link>
         </p>
-      </section>
-    </main>
+      }
+    >
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <AuthField
+          label="Email"
+          type="email"
+          name="email"
+          autoComplete="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <AuthField
+          label="Password"
+          type="password"
+          name="password"
+          autoComplete="current-password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        {error && <p className="auth-error">{error}</p>}
+        <AuthSubmitButton
+          isSubmitting={isSubmitting}
+          idleText="Enter"
+          submittingText="Entering..."
+        />
+      </form>
+    </AuthLayout>
   )
 }
 

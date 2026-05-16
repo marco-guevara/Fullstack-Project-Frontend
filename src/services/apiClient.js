@@ -1,28 +1,26 @@
+import axios from 'axios'
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 if (!API_BASE_URL) {
   throw new Error('VITE_API_BASE_URL is not configured')
 }
 
-export async function apiRequest(path, options = {}) {
-  const headers = new Headers(options.headers)
+const apiClient = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
 
-  if (!headers.has('Content-Type') && options.body) {
-    headers.set('Content-Type', 'application/json')
-  }
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const message = error.response?.data?.message || 'Something went wrong.'
 
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...options,
-    headers,
-    credentials: 'include',
-  })
+    return Promise.reject(new Error(message))
+  },
+)
 
-  const contentType = response.headers.get('content-type')
-  const data = contentType?.includes('application/json') ? await response.json() : null
-
-  if (!response.ok) {
-    throw new Error(data?.message || 'Something went wrong.')
-  }
-
-  return data
-}
+export default apiClient

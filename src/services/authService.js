@@ -1,31 +1,23 @@
-import { apiRequest } from './apiClient.js'
+import apiClient from './apiClient.js'
 
 export async function loginUser(credentials) {
-  const data = await apiRequest('/auth/login', {
-    method: 'POST',
-    body: JSON.stringify(credentials),
-  })
+  const { data } = await apiClient.post('/auth/login', credentials)
 
   return data.user
 }
 
 export async function registerUser(credentials) {
-  const data = await apiRequest('/auth/register', {
-    method: 'POST',
-    body: JSON.stringify(credentials),
-  })
+  const { data } = await apiClient.post('/auth/register', credentials)
 
   return data.user
 }
 
 export async function getCurrentUser() {
-  const data = await apiRequest('/auth/me')
+  const { data } = await apiClient.get('/auth/me')
 
   return data.user
 }
 
 export async function logoutUser() {
-  await apiRequest('/auth/logout', {
-    method: 'POST',
-  })
+  await apiClient.post('/auth/logout')
 }
