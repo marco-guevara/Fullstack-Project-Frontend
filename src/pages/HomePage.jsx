@@ -18,6 +18,7 @@ function HomePage() {
         <p className="auth-switch">{user?.email}</p>
         <div className="auth-actions">
           <Link to="/shop">Shop</Link>
+          <Link to="/cart">Cart</Link>
           <button type="button" onClick={handleLogout}>
             Logout
           </button>

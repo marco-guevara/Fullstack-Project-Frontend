@@ -26,9 +26,14 @@ function ProductDetailPage() {
   return (
     <main className="app">
       <section className="product-detail-page" aria-labelledby="product-title">
-        <Link className="back-link" to="/shop">
-          Back to shop
-        </Link>
+        <div className="detail-actions">
+          <Link className="back-link" to="/shop">
+            Back to shop
+          </Link>
+          <Link className="back-link" to="/cart">
+            Cart
+          </Link>
+        </div>
 
         {isLoading && <p className="auth-switch">Loading product...</p>}
         {error && <p className="auth-error">{error}</p>}
