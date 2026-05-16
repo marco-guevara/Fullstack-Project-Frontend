@@ -10,8 +10,15 @@ function RegisterPage() {
   const { register } = useAuth()
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    country: '',
+    phone: '',
   })
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -53,6 +60,22 @@ function RegisterPage() {
     >
       <form className="auth-form" onSubmit={handleSubmit}>
         <AuthField
+          label="First Name"
+          type="text"
+          name="firstName"
+          autoComplete="given-name"
+          value={formData.firstName}
+          onChange={handleChange}
+        />
+        <AuthField
+          label="Last Name"
+          type="text"
+          name="lastName"
+          autoComplete="family-name"
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+        <AuthField
           label="Email"
           type="email"
           name="email"
@@ -70,6 +93,46 @@ function RegisterPage() {
           onChange={handleChange}
           required
           minLength="6"
+        />
+        <AuthField
+          label="Address"
+          type="text"
+          name="address"
+          autoComplete="street-address"
+          value={formData.address}
+          onChange={handleChange}
+        />
+        <AuthField
+          label="City"
+          type="text"
+          name="city"
+          autoComplete="address-level2"
+          value={formData.city}
+          onChange={handleChange}
+        />
+        <AuthField
+          label="Postal Code"
+          type="text"
+          name="postalCode"
+          autoComplete="postal-code"
+          value={formData.postalCode}
+          onChange={handleChange}
+        />
+        <AuthField
+          label="Country"
+          type="text"
+          name="country"
+          autoComplete="country-name"
+          value={formData.country}
+          onChange={handleChange}
+        />
+        <AuthField
+          label="Phone"
+          type="tel"
+          name="phone"
+          autoComplete="tel"
+          value={formData.phone}
+          onChange={handleChange}
         />
         {error && <p className="auth-error">{error}</p>}
         <AuthSubmitButton
