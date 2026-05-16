@@ -39,7 +39,11 @@ function ShopPage() {
         {!isLoading && !error && (
           <div className="product-grid">
             {products.map((product) => (
-              <article className="product-card" key={product.productId}>
+              <Link
+                className="product-card"
+                key={product.productId}
+                to={`/products/${product.productId}`}
+              >
                 <div className="product-image">
                   {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
                 </div>
@@ -48,7 +52,7 @@ function ShopPage() {
                   <h2>{product.name}</h2>
                   <span>{Number(product.price).toFixed(2)} EUR</span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         )}

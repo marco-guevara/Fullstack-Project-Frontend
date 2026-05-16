@@ -3,6 +3,7 @@ import './App.css'
 import AuthGateway from './pages/AuthGateway.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
+import ProductDetailPage from './pages/ProductDetailPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 import ShopPage from './pages/ShopPage.jsx'
 import ProtectedRoute from './routes/ProtectedRoute.jsx'
@@ -16,6 +17,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/products/:productId" element={<ProductDetailPage />} />
       </Route>
     </Routes>
   )
