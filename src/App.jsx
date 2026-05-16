@@ -1,17 +1,21 @@
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import AuthGateway from './pages/AuthGateway.jsx'
+import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import RegisterPage from './pages/RegisterPage.jsx'
+import ProtectedRoute from './routes/ProtectedRoute.jsx'
 
 function App() {
   return (
-    <main className="app">
-      <section className="auth-gateway" aria-label="Baldo authentication gateway">
-        <p className="eyebrow">Architectural Utility</p>
-        <h1>Baldo</h1>
-        <div className="auth-actions">
-          <button type="button">Login</button>
-          <button type="button">Register</button>
-        </div>
-      </section>
-    </main>
+    <Routes>
+      <Route path="/" element={<AuthGateway />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/home" element={<HomePage />} />
+      </Route>
+    </Routes>
   )
 }
 
