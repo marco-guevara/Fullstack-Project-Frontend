@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { addCartItem } from '../services/cartService.js'
 import { getProductById } from '../services/productService.js'
 
 function ProductDetailPage() {
   const { productId } = useParams()
+  const navigate = useNavigate()
   const [product, setProduct] = useState(null)
+  const [selectedSize, setSelectedSize] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
+  const [quantity, setQuantity] = useState(1)
   const [error, setError] = useState('')
+  const [cartMessage, setCartMessage] = useState('')
+  const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -13,6 +20,8 @@ function ProductDetailPage() {
       try {
         const productData = await getProductById(productId)
         setProduct(productData)
+        setSelectedSize(productData.sizes?.[0] || '')
+        setSelectedColor(productData.colors?.[0] || '')
       } catch (productError) {
         setError(productError.message)
       } finally {
@@ -22,6 +31,37 @@ function ProductDetailPage() {
 
     loadProduct()
   }, [productId])
+
+  async function handleAddToCart(event) {
+    event.preventDefault()
+    setError('')
+    setCartMessage('')
+    setIsAddingToCart(true)
+
+    try {
+      await addCartItem({
+        productId: product.productId,
+        quantity,
+        selectedSize,
+        selectedColor,
+      })
+      setCartMessage('Product added to cart.')
+      return true
+    } catch (cartError) {
+      setError(cartError.message)
+      return false
+    } finally {
+      setIsAddingToCart(false)
+    }
+  }
+
+  async function handleAddAndViewCart(event) {
+    const wasAdded = await handleAddToCart(event)
+
+    if (wasAdded) {
+      navigate('/cart')
+    }
+  }
 
   return (
     <main className="app">
@@ -64,6 +104,65 @@ function ProductDetailPage() {
                   <dd>{product.stock}</dd>
                 </div>
               </dl>
+
+              <form className="cart-form" onSubmit={handleAddToCart}>
+                {product.sizes?.length > 0 && (
+                  <label>
+                    Size
+                    <select
+                      name="selectedSize"
+                      value={selectedSize}
+                      onChange={(event) => setSelectedSize(event.target.value)}
+                    >
+                      {product.sizes.map((size) => (
+                        <option key={size} value={size}>
+                          {size}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                )}
+
+                {product.colors?.length > 0 && (
+                  <label>
+                    Color
+                    <select
+                      name="selectedColor"
+                      value={selectedColor}
+                      onChange={(event) => setSelectedColor(event.target.value)}
+                    >
+                      {product.colors.map((color) => (
+                        <option key={color} value={color}>
+                          {color}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                )}
+
+                <label>
+                  Quantity
+                  <input
+                    type="number"
+                    min="1"
+                    value={quantity}
+                    onChange={(event) => setQuantity(Number(event.target.value))}
+                  />
+                </label>
+
+                {cartMessage && <p className="auth-switch">{cartMessage}</p>}
+
+                <button type="submit" disabled={isAddingToCart || product.stock < 1}>
+                  {isAddingToCart ? 'Adding...' : 'Add to Cart'}
+                </button>
+                <button
+                  type="button"
+                  disabled={isAddingToCart || product.stock < 1}
+                  onClick={handleAddAndViewCart}
+                >
+                  Add and View Cart
+                </button>
+              </form>
             </div>
           </article>
         )}

@@ -5,3 +5,9 @@ export async function getCart() {
 
   return data.cart
 }
+
+export async function addCartItem(cartItem) {
+  const { data } = await apiClient.post('/cart/items', cartItem)
+
+  return data.cart
+}
