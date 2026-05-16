@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/useAuth.js'
 
 function HomePage() {
@@ -17,6 +17,7 @@ function HomePage() {
         <h1>Home</h1>
         <p className="auth-switch">{user?.email}</p>
         <div className="auth-actions">
+          <Link to="/shop">Shop</Link>
           <button type="button" onClick={handleLogout}>
             Logout
           </button>
