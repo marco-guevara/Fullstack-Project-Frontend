@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import AuthContext from './authContext.js'
 import {
   getCurrentUser,
@@ -26,36 +26,33 @@ export function AuthProvider({ children }) {
     restoreSession()
   }, [])
 
-  const login = useCallback(async (credentials) => {
+  async function login(credentials) {
     const authenticatedUser = await loginUser(credentials)
     setUser(authenticatedUser)
 
     return authenticatedUser
-  }, [])
+  }
 
-  const register = useCallback(async (credentials) => {
+  async function register(credentials) {
     const authenticatedUser = await registerUser(credentials)
     setUser(authenticatedUser)
 
     return authenticatedUser
-  }, [])
+  }
 
-  const logout = useCallback(async () => {
+  async function logout() {
     await logoutUser()
     setUser(null)
-  }, [])
+  }
 
-  const value = useMemo(
-    () => ({
-      user,
-      isLoading,
-      isAuthenticated: Boolean(user),
-      login,
-      logout,
-      register,
-    }),
-    [isLoading, login, logout, register, user],
-  )
+  const value = {
+    user,
+    isLoading,
+    isAuthenticated: Boolean(user),
+    login,
+    logout,
+    register,
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
