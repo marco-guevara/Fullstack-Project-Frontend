@@ -457,6 +457,28 @@
   padding: 2rem;
 }
 
+.summary-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid #dadada;
+  padding-top: 1rem;
+  color: #74746c;
+  font-size: 0.875rem;
+}
+
+.summary-line strong {
+  color: #111111;
+}
+
+.summary-line-total {
+  color: #111111;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 @media (max-width: 760px) {
   .cart-layout {
     grid-template-columns: 1fr;

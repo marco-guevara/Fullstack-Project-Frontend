@@ -6,6 +6,13 @@ import {
   updateCartItem,
 } from '../services/cartService.js'
 
+const TAX_RATE = 0.21
+
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'EUR',
+})
+
 function CartPage() {
   const [cart, setCart] = useState(null)
   const [error, setError] = useState('')
@@ -29,6 +36,13 @@ function CartPage() {
 
   const items = cart?.items || []
   const totalItems = items.reduce((total, item) => total + item.quantity, 0)
+  const subtotal = items.reduce((total, item) => {
+    const itemPrice = Number(item.product?.price || 0)
+
+    return total + itemPrice * item.quantity
+  }, 0)
+  const tax = subtotal * TAX_RATE
+  const total = subtotal + tax
 
   async function handleQuantityChange(cartItemId, nextQuantity) {
     if (nextQuantity < 1) return
@@ -128,6 +142,18 @@ function CartPage() {
             <aside className="cart-summary">
               <p className="eyebrow">Summary</p>
               <h2>{totalItems} Items</h2>
+              <div className="summary-line">
+                <span>Subtotal</span>
+                <strong>{currencyFormatter.format(subtotal)}</strong>
+              </div>
+              <div className="summary-line">
+                <span>Tax</span>
+                <strong>{currencyFormatter.format(tax)}</strong>
+              </div>
+              <div className="summary-line summary-line-total">
+                <span>Total</span>
+                <strong>{currencyFormatter.format(total)}</strong>
+              </div>
             </aside>
           </div>
         )}
