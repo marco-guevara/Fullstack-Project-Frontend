@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   getCart,
   removeCartItem,
   updateCartItem,
 } from '../services/cartService.js'
+import { completeCheckout } from '../services/checkoutService.js'
 
 const TAX_RATE = 0.21
 
@@ -14,10 +15,12 @@ const currencyFormatter = new Intl.NumberFormat('en-US', {
 })
 
 function CartPage() {
+  const navigate = useNavigate()
   const [cart, setCart] = useState(null)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [updatingItemId, setUpdatingItemId] = useState('')
+  const [isCheckingOut, setIsCheckingOut] = useState(false)
 
   useEffect(() => {
     async function loadCart() {
@@ -71,6 +74,24 @@ function CartPage() {
       setError(cartError.message)
     } finally {
       setUpdatingItemId('')
+    }
+  }
+
+  async function handleCheckout() {
+    setError('')
+    setIsCheckingOut(true)
+
+    try {
+      const checkoutResult = await completeCheckout()
+      navigate('/order-success', {
+        state: {
+          orderReference: checkoutResult.orderReference,
+        },
+      })
+    } catch (checkoutError) {
+      setError(checkoutError.message)
+    } finally {
+      setIsCheckingOut(false)
     }
   }
 
@@ -154,6 +175,14 @@ function CartPage() {
                 <span>Total</span>
                 <strong>{currencyFormatter.format(total)}</strong>
               </div>
+              <button
+                className="checkout-button"
+                type="button"
+                disabled={isCheckingOut}
+                onClick={handleCheckout}
+              >
+                {isCheckingOut ? 'Checking out...' : 'Checkout'}
+              </button>
             </aside>
           </div>
         )}
