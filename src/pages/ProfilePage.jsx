@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Mail, MapPin, Phone, Save, UserRound } from 'lucide-react'
+import AppFooter from '../components/AppFooter.jsx'
 import AppNav from '../components/AppNav.jsx'
 import { useAuth } from '../context/useAuth.js'
 
@@ -55,82 +57,110 @@ function ProfilePage() {
             <p className="eyebrow">Account</p>
             <h1 id="profile-title">Profile</h1>
           </div>
-          <p className="auth-switch">{user?.email}</p>
+          <p className="profile-email">
+            <Mail aria-hidden="true" size={16} strokeWidth={1.8} />
+            {user?.email}
+          </p>
         </header>
 
-        <form className="profile-form" onSubmit={handleSubmit}>
-          <label>
-            First name
-            <input
-              name="firstName"
-              type="text"
-              value={formData.firstName}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Last name
-            <input
-              name="lastName"
-              type="text"
-              value={formData.lastName}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Address
-            <input
-              name="address"
-              type="text"
-              value={formData.address}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            City
-            <input
-              name="city"
-              type="text"
-              value={formData.city}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Postal code
-            <input
-              name="postalCode"
-              type="text"
-              value={formData.postalCode}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Country
-            <input
-              name="country"
-              type="text"
-              value={formData.country}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Phone
-            <input
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </label>
+        <div className="profile-layout">
+          <aside className="profile-summary" aria-label="Account summary">
+            <div>
+              <UserRound aria-hidden="true" size={22} strokeWidth={1.6} />
+              <span>Customer Profile</span>
+            </div>
+            <p>
+              Keep your delivery details updated before completing checkout.
+            </p>
+          </aside>
 
-          {error && <p className="auth-error">{error}</p>}
-          {message && <p className="auth-switch">{message}</p>}
+          <form className="profile-form" onSubmit={handleSubmit}>
+            <label>
+              First name
+              <input
+                name="firstName"
+                type="text"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Last name
+              <input
+                name="lastName"
+                type="text"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Address
+              <input
+                name="address"
+                type="text"
+                value={formData.address}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              City
+              <input
+                name="city"
+                type="text"
+                value={formData.city}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Postal code
+              <input
+                name="postalCode"
+                type="text"
+                value={formData.postalCode}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Country
+              <input
+                name="country"
+                type="text"
+                value={formData.country}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Phone
+              <input
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </label>
 
-          <button type="submit" disabled={isSaving}>
-            {isSaving ? 'Saving...' : 'Save Profile'}
-          </button>
-        </form>
+            <div className="profile-contact-notes" aria-hidden="true">
+              <span>
+                <MapPin size={15} strokeWidth={1.8} />
+                Delivery address
+              </span>
+              <span>
+                <Phone size={15} strokeWidth={1.8} />
+                Contact details
+              </span>
+            </div>
+
+            {error && <p className="auth-error">{error}</p>}
+            {message && <p className="auth-switch">{message}</p>}
+
+            <button type="submit" disabled={isSaving}>
+              <Save aria-hidden="true" size={16} strokeWidth={1.8} />
+              {isSaving ? 'Saving...' : 'Save Profile'}
+            </button>
+          </form>
+        </div>
       </section>
+      <AppFooter />
     </main>
   )
 }
