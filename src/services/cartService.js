@@ -11,3 +11,17 @@ export async function addCartItem(cartItem) {
 
   return data.cart
 }
+
+export async function updateCartItem(cartItemId, quantity) {
+  const { data } = await apiClient.patch(`/cart/items/${cartItemId}`, {
+    quantity,
+  })
+
+  return data.cart
+}
+
+export async function removeCartItem(cartItemId) {
+  const { data } = await apiClient.delete(`/cart/items/${cartItemId}`)
+
+  return data.cart
+}
