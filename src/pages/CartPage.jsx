@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getCart } from '../services/cartService.js'
+import {
+  getCart,
+  removeCartItem,
+  updateCartItem,
+} from '../services/cartService.js'
 
 function CartPage() {
   const [cart, setCart] = useState(null)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [updatingItemId, setUpdatingItemId] = useState('')
 
   useEffect(() => {
     async function loadCart() {
@@ -24,6 +29,36 @@ function CartPage() {
 
   const items = cart?.items || []
   const totalItems = items.reduce((total, item) => total + item.quantity, 0)
+
+  async function handleQuantityChange(cartItemId, nextQuantity) {
+    if (nextQuantity < 1) return
+
+    setError('')
+    setUpdatingItemId(cartItemId)
+
+    try {
+      const updatedCart = await updateCartItem(cartItemId, nextQuantity)
+      setCart(updatedCart)
+    } catch (cartError) {
+      setError(cartError.message)
+    } finally {
+      setUpdatingItemId('')
+    }
+  }
+
+  async function handleRemoveItem(cartItemId) {
+    setError('')
+    setUpdatingItemId(cartItemId)
+
+    try {
+      const updatedCart = await removeCartItem(cartItemId)
+      setCart(updatedCart)
+    } catch (cartError) {
+      setError(cartError.message)
+    } finally {
+      setUpdatingItemId('')
+    }
+  }
 
   return (
     <main className="app">
@@ -59,9 +94,32 @@ function CartPage() {
                   <div>
                     <p className="eyebrow">{item.product?.category || 'Product'}</p>
                     <h2>{item.product?.name}</h2>
-                    <p className="auth-switch">Quantity: {item.quantity}</p>
                     <p className="auth-switch">Size: {item.selectedSize || 'One size'}</p>
                     <p className="auth-switch">Color: {item.selectedColor || 'Standard'}</p>
+                    <div className="cart-item-controls" aria-label="Cart item controls">
+                      <button
+                        type="button"
+                        disabled={updatingItemId === item.cartItemId || item.quantity <= 1}
+                        onClick={() => handleQuantityChange(item.cartItemId, item.quantity - 1)}
+                      >
+                        -
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button
+                        type="button"
+                        disabled={updatingItemId === item.cartItemId}
+                        onClick={() => handleQuantityChange(item.cartItemId, item.quantity + 1)}
+                      >
+                        +
+                      </button>
+                      <button
+                        type="button"
+                        disabled={updatingItemId === item.cartItemId}
+                        onClick={() => handleRemoveItem(item.cartItemId)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </article>
               ))}
