@@ -1,3 +1,4 @@
+import { Minus, Plus, ReceiptText, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AppNav from '../components/AppNav.jsx'
@@ -131,6 +132,9 @@ function CartPage() {
                   <div>
                     <p className="eyebrow">{item.product?.category || 'Product'}</p>
                     <h2>{item.product?.name}</h2>
+                    <p className="cart-item-price">
+                      {currencyFormatter.format(Number(item.product?.price || 0))} each
+                    </p>
                     <p className="auth-switch">Size: {item.selectedSize || 'One size'}</p>
                     <p className="auth-switch">Color: {item.selectedColor || 'Standard'}</p>
                     <div className="cart-item-controls" aria-label="Cart item controls">
@@ -139,7 +143,7 @@ function CartPage() {
                         disabled={updatingItemId === item.cartItemId || item.quantity <= 1}
                         onClick={() => handleQuantityChange(item.cartItemId, item.quantity - 1)}
                       >
-                        -
+                        <Minus aria-hidden="true" size={14} strokeWidth={1.8} />
                       </button>
                       <span>{item.quantity}</span>
                       <button
@@ -147,24 +151,31 @@ function CartPage() {
                         disabled={updatingItemId === item.cartItemId}
                         onClick={() => handleQuantityChange(item.cartItemId, item.quantity + 1)}
                       >
-                        +
+                        <Plus aria-hidden="true" size={14} strokeWidth={1.8} />
                       </button>
                       <button
                         type="button"
                         disabled={updatingItemId === item.cartItemId}
                         onClick={() => handleRemoveItem(item.cartItemId)}
                       >
+                        <Trash2 aria-hidden="true" size={14} strokeWidth={1.8} />
                         Remove
                       </button>
                     </div>
                   </div>
+                  <strong className="cart-item-total">
+                    {currencyFormatter.format(Number(item.product?.price || 0) * item.quantity)}
+                  </strong>
                 </article>
               ))}
             </div>
 
             <aside className="cart-summary">
               <p className="eyebrow">Summary</p>
-              <h2>{totalItems} Items</h2>
+              <h2>
+                <ReceiptText aria-hidden="true" size={18} strokeWidth={1.8} />
+                {totalItems} Items
+              </h2>
               <div className="summary-line">
                 <span>Subtotal</span>
                 <strong>{currencyFormatter.format(subtotal)}</strong>
