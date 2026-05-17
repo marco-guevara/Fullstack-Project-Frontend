@@ -13,7 +13,8 @@ function ProductDetailPage() {
   const [selectedSize, setSelectedSize] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [quantity, setQuantity] = useState(1)
-  const [error, setError] = useState('')
+  const [productError, setProductError] = useState('')
+  const [cartError, setCartError] = useState('')
   const [cartMessage, setCartMessage] = useState('')
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -26,7 +27,7 @@ function ProductDetailPage() {
         setSelectedSize(productData.sizes?.[0] || '')
         setSelectedColor(productData.colors?.[0] || '')
       } catch (productError) {
-        setError(productError.message)
+        setProductError(productError.message)
       } finally {
         setIsLoading(false)
       }
@@ -37,7 +38,12 @@ function ProductDetailPage() {
 
   async function handleAddToCart(event) {
     event.preventDefault()
-    setError('')
+
+    if (!product || isAddingToCart) {
+      return false
+    }
+
+    setCartError('')
     setCartMessage('')
     setIsAddingToCart(true)
 
@@ -51,7 +57,7 @@ function ProductDetailPage() {
       setCartMessage('Product added to cart.')
       return true
     } catch (cartError) {
-      setError(cartError.message)
+      setCartError(cartError.message)
       return false
     } finally {
       setIsAddingToCart(false)
@@ -80,9 +86,9 @@ function ProductDetailPage() {
         </div>
 
         {isLoading && <p className="auth-switch">Loading product...</p>}
-        {error && <p className="auth-error">{error}</p>}
+        {productError && <p className="auth-error">{productError}</p>}
 
-        {!isLoading && !error && product && (
+        {!isLoading && !productError && product && (
           <article className="product-detail">
             <div className="product-detail-image">
               {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
@@ -164,6 +170,7 @@ function ProductDetailPage() {
                 </label>
 
                 {cartMessage && <p className="auth-switch">{cartMessage}</p>}
+                {cartError && <p className="auth-error">{cartError}</p>}
 
                 <button type="submit" disabled={isAddingToCart || product.stock < 1}>
                   {isAddingToCart ? 'Adding...' : 'Add to Cart'}

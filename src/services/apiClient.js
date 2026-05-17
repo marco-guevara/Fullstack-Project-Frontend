@@ -18,8 +18,11 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const message = error.response?.data?.message || 'Something went wrong.'
+    const apiError = new Error(message)
+    apiError.status = error.response?.status
+    apiError.detail = error.response?.data?.error
 
-    return Promise.reject(new Error(message))
+    return Promise.reject(apiError)
   },
 )
 
