@@ -4,6 +4,7 @@ import AuthGateway from './pages/AuthGateway.jsx'
 import CartPage from './pages/CartPage.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
+import OrderSuccessPage from './pages/OrderSuccessPage.jsx'
 import ProductDetailPage from './pages/ProductDetailPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 import ShopPage from './pages/ShopPage.jsx'
@@ -20,6 +21,7 @@ function App() {
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/products/:productId" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/order-success" element={<OrderSuccessPage />} />
       </Route>
     </Routes>
   )

@@ -479,6 +479,43 @@
   text-transform: uppercase;
 }
 
+.order-success-page {
+  display: grid;
+  min-height: 100vh;
+  align-content: center;
+  justify-items: start;
+  gap: 1.5rem;
+  width: min(100% - 2rem, 720px);
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+.order-success-page h1 {
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.order-reference {
+  margin: 0;
+  border-top: 1px solid #111111;
+  border-bottom: 1px solid #111111;
+  padding: 1rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.order-success-page a {
+  color: #111111;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 760px) {
   .cart-layout {
     grid-template-columns: 1fr;
