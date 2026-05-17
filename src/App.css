@@ -150,7 +150,7 @@
   z-index: -2;
   background:
     linear-gradient(90deg, rgba(13, 13, 12, 0.76), rgba(13, 13, 12, 0.22)),
-    url('./assets/hero.png') center / cover;
+    url('./assets/hero-apparel.png') center / cover;
   content: '';
   filter: grayscale(1);
   transform: scale(1.02);
@@ -273,7 +273,7 @@
   padding: clamp(2rem, 5vw, 4rem);
   background:
     linear-gradient(180deg, transparent, rgba(13, 13, 12, 0.72)),
-    url('./assets/hero.png') center / cover;
+    url('./assets/hero-apparel.png') center / cover;
   color: var(--color-white);
   filter: grayscale(1);
 }
