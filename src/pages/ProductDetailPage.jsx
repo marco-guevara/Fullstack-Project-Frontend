@@ -1,3 +1,4 @@
+import { Boxes, Palette, Ruler } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import AppNav from '../components/AppNav.jsx'
@@ -94,15 +95,24 @@ function ProductDetailPage() {
 
               <dl className="product-meta">
                 <div>
-                  <dt>Sizes</dt>
+                  <dt>
+                    <Ruler aria-hidden="true" size={15} strokeWidth={1.8} />
+                    Sizes
+                  </dt>
                   <dd>{product.sizes?.length ? product.sizes.join(', ') : 'One size'}</dd>
                 </div>
                 <div>
-                  <dt>Colors</dt>
+                  <dt>
+                    <Palette aria-hidden="true" size={15} strokeWidth={1.8} />
+                    Colors
+                  </dt>
                   <dd>{product.colors?.length ? product.colors.join(', ') : 'Standard'}</dd>
                 </div>
                 <div>
-                  <dt>Stock</dt>
+                  <dt>
+                    <Boxes aria-hidden="true" size={15} strokeWidth={1.8} />
+                    Stock
+                  </dt>
                   <dd>{product.stock}</dd>
                 </div>
               </dl>
