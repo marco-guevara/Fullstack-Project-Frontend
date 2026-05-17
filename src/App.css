@@ -933,7 +933,7 @@
 
 .order-success-page {
   display: grid;
-  min-height: 100vh;
+  min-height: calc(100vh - 73px);
   align-content: center;
   justify-items: start;
   gap: 1.5rem;
@@ -943,14 +943,39 @@
   animation: page-enter 420ms ease both;
 }
 
-.order-success-page h1 {
+.success-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+}
+
+.order-success-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.order-success-copy h1 {
   margin: 0;
   font-size: clamp(3rem, 10vw, 7rem);
   line-height: 0.95;
   text-transform: uppercase;
 }
 
+.order-success-copy p:last-child {
+  max-width: 520px;
+  margin: 0;
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+}
+
 .order-reference {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   margin: 0;
   border-top: 1px solid var(--color-line);
   border-bottom: 1px solid var(--color-line);
@@ -961,8 +986,39 @@
   text-transform: uppercase;
 }
 
-.order-success-page a {
+.order-success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.order-success-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 170px;
+  border: 1px solid var(--color-line);
+  padding: 0.9rem 1.25rem;
+  background: var(--color-ink);
+  color: var(--color-white);
+  text-decoration: none;
+  transition:
+    background var(--transition-smooth),
+    color var(--transition-smooth),
+    transform var(--transition-smooth);
+}
+
+.order-success-actions a:last-child {
+  background: transparent;
   color: var(--color-ink);
+}
+
+.order-success-actions a:hover {
+  transform: translateY(-2px);
+}
+
+.order-success-actions a {
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
