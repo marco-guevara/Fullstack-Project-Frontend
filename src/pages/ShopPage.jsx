@@ -1,6 +1,7 @@
 import { SlidersHorizontal } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import AppFooter from '../components/AppFooter.jsx'
 import AppNav from '../components/AppNav.jsx'
 import { getProducts } from '../services/productService.js'
 
@@ -96,6 +97,7 @@ function ShopPage() {
           </>
         )}
       </section>
+      <AppFooter />
     </main>
   )
 }

@@ -1,29 +1,7 @@
-import { Home, LogOut, ShoppingBag, Store, User } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/useAuth.js'
-
-const navItems = [
-  {
-    label: 'Home',
-    to: '/home',
-    icon: Home,
-  },
-  {
-    label: 'Shop',
-    to: '/shop',
-    icon: Store,
-  },
-  {
-    label: 'Cart',
-    to: '/cart',
-    icon: ShoppingBag,
-  },
-  {
-    label: 'Profile',
-    to: '/profile',
-    icon: User,
-  },
-]
+import { navItems } from './navItems.js'
 
 function AppNav() {
   const { logout } = useAuth()

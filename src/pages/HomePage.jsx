@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import AppFooter from '../components/AppFooter.jsx'
 import AppNav from '../components/AppNav.jsx'
 import { useAuth } from '../context/useAuth.js'
 
@@ -17,6 +18,7 @@ function HomePage() {
           <Link to="/cart">Cart</Link>
         </div>
       </section>
+      <AppFooter />
     </main>
   )
 }

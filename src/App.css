@@ -81,6 +81,56 @@
   transform: scaleX(1);
 }
 
+.app-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 1px solid var(--color-line);
+  padding: 2rem var(--page-gutter);
+  background: var(--color-surface);
+}
+
+.app-footer p {
+  margin: 0;
+}
+
+.app-footer-brand {
+  color: var(--color-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.app-footer p:not(.app-footer-brand),
+.app-footer a {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.app-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.app-footer > a {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.4rem;
+}
+
+.app-footer a:hover {
+  color: var(--color-ink);
+}
+
 .auth-gateway {
   position: relative;
   isolation: isolate;
@@ -1061,6 +1111,19 @@
 }
 
 @media (max-width: 760px) {
+  .app-footer {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .app-footer nav {
+    justify-content: flex-start;
+  }
+
+  .app-footer > a {
+    justify-self: start;
+  }
+
   .shop-header {
     align-items: start;
     flex-direction: column;

@@ -1,6 +1,7 @@
 import { Boxes, Palette, Ruler } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import AppFooter from '../components/AppFooter.jsx'
 import AppNav from '../components/AppNav.jsx'
 import { addCartItem } from '../services/cartService.js'
 import { getProductById } from '../services/productService.js'
@@ -179,6 +180,7 @@ function ProductDetailPage() {
           </article>
         )}
       </section>
+      <AppFooter />
     </main>
   )
 }

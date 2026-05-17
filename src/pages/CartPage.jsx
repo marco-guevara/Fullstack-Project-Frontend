@@ -1,6 +1,7 @@
 import { Minus, Plus, ReceiptText, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AppFooter from '../components/AppFooter.jsx'
 import AppNav from '../components/AppNav.jsx'
 import {
   getCart,
@@ -200,6 +201,7 @@ function CartPage() {
           </div>
         )}
       </section>
+      <AppFooter />
     </main>
   )
 }

@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, CheckCircle2, ReceiptText, UserRound } from 'lucide-react'
+import AppFooter from '../components/AppFooter.jsx'
 import AppNav from '../components/AppNav.jsx'
 
 function OrderSuccessPage() {
@@ -39,6 +40,7 @@ function OrderSuccessPage() {
           </Link>
         </div>
       </section>
+      <AppFooter />
     </main>
   )
 }
