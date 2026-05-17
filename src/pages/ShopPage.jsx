@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import AppNav from '../components/AppNav.jsx'
 import { getProducts } from '../services/productService.js'
 
 function ShopPage() {
@@ -24,13 +25,14 @@ function ShopPage() {
 
   return (
     <main className="app">
+      <AppNav />
       <section className="shop-page" aria-labelledby="shop-title">
         <header className="shop-header">
           <div>
             <p className="eyebrow">Archive Selection</p>
             <h1 id="shop-title">Shop</h1>
           </div>
-          <Link to="/home">Home</Link>
+          <Link to="/cart">Cart</Link>
         </header>
 
         {isLoading && <p className="auth-switch">Loading products...</p>}

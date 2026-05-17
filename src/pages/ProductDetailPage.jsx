@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import AppNav from '../components/AppNav.jsx'
 import { addCartItem } from '../services/cartService.js'
 import { getProductById } from '../services/productService.js'
 
@@ -65,6 +66,7 @@ function ProductDetailPage() {
 
   return (
     <main className="app">
+      <AppNav />
       <section className="product-detail-page" aria-labelledby="product-title">
         <div className="detail-actions">
           <Link className="back-link" to="/shop">

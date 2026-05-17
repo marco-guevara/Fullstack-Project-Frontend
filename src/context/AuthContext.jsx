@@ -6,6 +6,7 @@ import {
   logoutUser,
   registerUser,
 } from '../services/authService.js'
+import { updateCurrentUserProfile } from '../services/userService.js'
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
@@ -45,6 +46,13 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
+  async function updateProfile(profileData) {
+    const updatedUser = await updateCurrentUserProfile(profileData)
+    setUser(updatedUser)
+
+    return updatedUser
+  }
+
   const value = {
     user,
     isLoading,
@@ -52,6 +60,7 @@ export function AuthProvider({ children }) {
     login,
     logout,
     register,
+    updateProfile,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
