@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AppNav from '../components/AppNav.jsx'
 import {
   getCart,
   removeCartItem,
@@ -97,6 +98,7 @@ function CartPage() {
 
   return (
     <main className="app">
+      <AppNav />
       <section className="cart-page" aria-labelledby="cart-title">
         <header className="shop-header">
           <div>

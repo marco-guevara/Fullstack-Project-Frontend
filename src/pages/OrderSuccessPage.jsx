@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
+import AppNav from '../components/AppNav.jsx'
 
 function OrderSuccessPage() {
   const location = useLocation()
@@ -6,6 +7,7 @@ function OrderSuccessPage() {
 
   return (
     <main className="app">
+      <AppNav />
       <section className="order-success-page" aria-labelledby="order-success-title">
         <p className="eyebrow">Order Success</p>
         <h1 id="order-success-title">Thank you.</h1>
