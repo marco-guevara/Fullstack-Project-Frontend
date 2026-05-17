@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { SlidersHorizontal } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AppNav from '../components/AppNav.jsx'
 import { getProducts } from '../services/productService.js'
 
 function ShopPage() {
   const [products, setProducts] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('All')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
 
@@ -23,40 +25,75 @@ function ShopPage() {
     loadProducts()
   }, [])
 
+  const categories = useMemo(() => {
+    const productCategories = products
+      .map((product) => product.category || 'Uncategorized')
+      .filter(Boolean)
+
+    return ['All', ...new Set(productCategories)]
+  }, [products])
+
+  const visibleProducts = selectedCategory === 'All'
+    ? products
+    : products.filter((product) => (
+      (product.category || 'Uncategorized') === selectedCategory
+    ))
+
   return (
     <main className="app">
       <AppNav />
       <section className="shop-page" aria-labelledby="shop-title">
         <header className="shop-header">
           <div>
-            <p className="eyebrow">Archive Selection</p>
+            <p className="eyebrow">Collections / 2026</p>
             <h1 id="shop-title">Shop</h1>
           </div>
-          <Link to="/cart">Cart</Link>
+          <div className="shop-header-meta">
+            <span>
+              <SlidersHorizontal aria-hidden="true" size={14} strokeWidth={1.8} />
+              Filters
+            </span>
+            <p>{visibleProducts.length} items</p>
+          </div>
         </header>
 
         {isLoading && <p className="auth-switch">Loading products...</p>}
         {error && <p className="auth-error">{error}</p>}
 
         {!isLoading && !error && (
-          <div className="product-grid">
-            {products.map((product) => (
-              <Link
-                className="product-card"
-                key={product.productId}
-                to={`/products/${product.productId}`}
-              >
-                <div className="product-image">
-                  {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
-                </div>
-                <div className="product-info">
-                  <p>{product.category || 'Uncategorized'}</p>
-                  <h2>{product.name}</h2>
-                  <span>{Number(product.price).toFixed(2)} EUR</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <>
+            <div className="category-filters" aria-label="Product categories">
+              {categories.map((category) => (
+                <button
+                  className={category === selectedCategory ? 'active' : ''}
+                  key={category}
+                  type="button"
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            <div className="product-grid">
+              {visibleProducts.map((product) => (
+                <Link
+                  className="product-card"
+                  key={product.productId}
+                  to={`/products/${product.productId}`}
+                >
+                  <div className="product-image">
+                    {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
+                  </div>
+                  <div className="product-info">
+                    <p>{product.category || 'Uncategorized'}</p>
+                    <h2>{product.name}</h2>
+                    <span>{Number(product.price).toFixed(2)} EUR</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </>
         )}
       </section>
     </main>
