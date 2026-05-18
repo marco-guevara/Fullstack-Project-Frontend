@@ -9,7 +9,7 @@ function ProductCard({ product }) {
       <div className="product-image">
         {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
       </div>
-      <div className="product-info">
+      <div className="product-card-info">
         <p>{product.category || 'Uncategorized'}</p>
         <h2>{product.name}</h2>
         <span>{Number(product.price).toFixed(2)} EUR</span>

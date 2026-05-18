@@ -1,4 +1,5 @@
-import { LogOut } from 'lucide-react'
+import { LogOut, Menu, X } from 'lucide-react'
+import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/useAuth.js'
 import { navItems } from './navItems.js'
@@ -6,18 +7,38 @@ import { navItems } from './navItems.js'
 function AppNav() {
   const { logout } = useAuth()
   const navigate = useNavigate()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   async function handleLogout() {
     await logout()
+    setIsMenuOpen(false)
     navigate('/login', { replace: true })
   }
 
   return (
     <header className="app-nav">
-      <Link className="app-nav-brand" to="/home">
+      <Link className="app-nav-brand" to="/home" onClick={() => setIsMenuOpen(false)}>
         Baldo
       </Link>
-      <nav aria-label="Primary navigation">
+      <button
+        className="app-nav-menu-button"
+        type="button"
+        aria-controls="primary-navigation"
+        aria-expanded={isMenuOpen}
+        onClick={() => setIsMenuOpen((currentState) => !currentState)}
+      >
+        {isMenuOpen ? (
+          <X aria-hidden="true" size={18} strokeWidth={1.8} />
+        ) : (
+          <Menu aria-hidden="true" size={18} strokeWidth={1.8} />
+        )}
+        <span>Menu</span>
+      </button>
+      <nav
+        id="primary-navigation"
+        className={isMenuOpen ? 'app-nav-menu open' : 'app-nav-menu'}
+        aria-label="Primary navigation"
+      >
         {navItems.map(({ icon: Icon, label, to }) => (
           <NavLink
             className={({ isActive }) => (
@@ -25,6 +46,7 @@ function AppNav() {
             )}
             key={to}
             to={to}
+            onClick={() => setIsMenuOpen(false)}
           >
             <Icon aria-hidden="true" size={15} strokeWidth={1.8} />
             <span>{label}</span>

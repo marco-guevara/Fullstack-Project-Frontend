@@ -1,51 +1,51 @@
-import { useState } from 'react'
-import { Mail, MapPin, Phone, Save, UserRound } from 'lucide-react'
-import AppLayout from '../components/AppLayout.jsx'
-import FormMessage from '../components/FormMessage.jsx'
-import PageHeader from '../components/PageHeader.jsx'
-import { useAuth } from '../context/useAuth.js'
+import { useState } from "react";
+import { Mail, MapPin, Phone, Save, UserRound } from "lucide-react";
+import AppLayout from "../components/AppLayout.jsx";
+import FormMessage from "../components/FormMessage.jsx";
+import PageHeader from "../components/PageHeader.jsx";
+import { useAuth } from "../context/useAuth.js";
 
 function getInitialProfileData(user) {
   return {
-    firstName: user?.firstName || '',
-    lastName: user?.lastName || '',
-    address: user?.address || '',
-    city: user?.city || '',
-    postalCode: user?.postalCode || '',
-    country: user?.country || '',
-    phone: user?.phone || '',
-  }
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
+    address: user?.address || "",
+    city: user?.city || "",
+    postalCode: user?.postalCode || "",
+    country: user?.country || "",
+    phone: user?.phone || "",
+  };
 }
 
 function ProfilePage() {
-  const { updateProfile, user } = useAuth()
-  const [formData, setFormData] = useState(() => getInitialProfileData(user))
-  const [error, setError] = useState('')
-  const [message, setMessage] = useState('')
-  const [isSaving, setIsSaving] = useState(false)
+  const { updateProfile, user } = useAuth();
+  const [formData, setFormData] = useState(() => getInitialProfileData(user));
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   function handleChange(event) {
-    const { name, value } = event.target
+    const { name, value } = event.target;
 
     setFormData((currentData) => ({
       ...currentData,
       [name]: value,
-    }))
+    }));
   }
 
   async function handleSubmit(event) {
-    event.preventDefault()
-    setError('')
-    setMessage('')
-    setIsSaving(true)
+    event.preventDefault();
+    setError("");
+    setMessage("");
+    setIsSaving(true);
 
     try {
-      await updateProfile(formData)
-      setMessage('Profile updated.')
+      await updateProfile(formData);
+      setMessage("Profile updated.");
     } catch (profileError) {
-      setError(profileError.message)
+      setError(profileError.message);
     } finally {
-      setIsSaving(false)
+      setIsSaving(false);
     }
   }
 
@@ -138,11 +138,11 @@ function ProfilePage() {
             <div className="profile-contact-notes" aria-hidden="true">
               <span>
                 <MapPin size={15} strokeWidth={1.8} />
-                Delivery address
+                <p>Delivery address</p>
               </span>
               <span>
                 <Phone size={15} strokeWidth={1.8} />
-                Contact details
+                <p>Contact details</p>
               </span>
             </div>
 
@@ -151,13 +151,13 @@ function ProfilePage() {
 
             <button type="submit" disabled={isSaving}>
               <Save aria-hidden="true" size={16} strokeWidth={1.8} />
-              {isSaving ? 'Saving...' : 'Save Profile'}
+              {isSaving ? "Saving..." : "Save Profile"}
             </button>
           </form>
         </div>
       </section>
     </AppLayout>
-  )
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;

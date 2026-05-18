@@ -1,0 +1,192 @@
+.auth-gateway {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: 100vh;
+  align-content: end;
+  justify-items: start;
+  gap: 1.5rem;
+  padding: clamp(2rem, 6vw, 5rem);
+  overflow: hidden;
+  animation: page-enter 420ms ease both;
+}
+
+.auth-gateway::before {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(13, 13, 12, 0.76), rgba(13, 13, 12, 0.22)),
+    url('../assets/hero-apparel.png') center / cover;
+  content: '';
+  transform: scale(1.02);
+}
+
+.auth-gateway::after {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 42%;
+  background: linear-gradient(0deg, rgba(13, 13, 12, 0.76), transparent);
+  content: '';
+}
+
+.auth-gateway-copy {
+  display: grid;
+  gap: 1rem;
+  max-width: 720px;
+  color: var(--color-white);
+}
+
+.auth-gateway h1 {
+  margin: 0;
+  color: var(--color-white);
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 500;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.auth-gateway .eyebrow {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.auth-gateway-copy p:last-child {
+  max-width: 520px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.55;
+}
+
+.auth-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+
+.auth-actions a,
+.auth-actions button,
+.auth-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  border: 1px solid var(--color-line);
+  padding: 0.9rem 1.25rem;
+  background: var(--color-ink);
+  color: var(--color-white);
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background var(--transition-smooth),
+    color var(--transition-smooth),
+    opacity var(--transition-smooth),
+    transform var(--transition-smooth);
+}
+
+.auth-actions a:last-child {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+}
+
+.auth-actions a:hover,
+.auth-form button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.auth-actions button {
+  min-width: 150px;
+}
+
+.auth-page {
+  display: grid;
+  align-items: center;
+  padding: 2rem var(--page-gutter);
+}
+
+.auth-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 0.65fr);
+  align-items: stretch;
+  justify-items: stretch;
+  gap: 0;
+  width: min(100%, 960px);
+  margin: 0 auto;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  animation: page-enter 420ms ease both;
+}
+
+.auth-panel-header {
+  display: grid;
+  align-content: end;
+  gap: 1rem;
+  min-height: 620px;
+  padding: clamp(2rem, 5vw, 4rem);
+  background:
+    linear-gradient(180deg, transparent, rgba(13, 13, 12, 0.72)),
+    url('../assets/hero-apparel.png') center / cover;
+  color: var(--color-white);
+}
+
+.auth-panel-header .eyebrow {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.auth-panel-header h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.auth-panel-header p:last-child {
+  max-width: 320px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.55;
+}
+
+.auth-panel-body {
+  display: grid;
+  align-content: center;
+  gap: 1.5rem;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.auth-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.auth-form input {
+  border: 0;
+  border-bottom: 1px solid var(--color-line);
+  border-radius: 0;
+  padding: 0.8rem 0;
+  background: transparent;
+  color: var(--color-ink);
+  outline: none;
+}
+
+.auth-form button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}

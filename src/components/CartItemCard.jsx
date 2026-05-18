@@ -26,8 +26,8 @@ function CartItemCard({
         <p className="cart-item-price">
           {currencyFormatter.format(itemPrice)} each
         </p>
-        <p className="auth-switch">Size: {item.selectedSize || 'One size'}</p>
-        <p className="auth-switch">Color: {item.selectedColor || 'Standard'}</p>
+        <p className="muted-text">Size: {item.selectedSize || 'One size'}</p>
+        <p className="muted-text">Color: {item.selectedColor || 'Standard'}</p>
         <div className="cart-item-controls" aria-label="Cart item controls">
           <button
             type="button"

@@ -54,7 +54,7 @@ function RegisterPage() {
       title="Register"
       titleId="register-title"
       footer={
-        <p className="auth-switch">
+        <p className="muted-text">
           Already registered? <Link to="/login">Login</Link>
         </p>
       }
