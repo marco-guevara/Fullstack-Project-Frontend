@@ -2,6 +2,7 @@ import { SlidersHorizontal } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AppLayout from '../components/AppLayout.jsx'
+import PageHeader from '../components/PageHeader.jsx'
 import { getProducts } from '../services/productService.js'
 
 function ShopPage() {
@@ -42,11 +43,7 @@ function ShopPage() {
   return (
     <AppLayout>
       <section className="shop-page" aria-labelledby="shop-title">
-        <header className="shop-header">
-          <div>
-            <p className="eyebrow">Collections / 2026</p>
-            <h1 id="shop-title">Shop</h1>
-          </div>
+        <PageHeader eyebrow="Collections / 2026" title="Shop" titleId="shop-title">
           <div className="shop-header-meta">
             <span>
               <SlidersHorizontal aria-hidden="true" size={14} strokeWidth={1.8} />
@@ -54,7 +51,7 @@ function ShopPage() {
             </span>
             <p>{visibleProducts.length} items</p>
           </div>
-        </header>
+        </PageHeader>
 
         {isLoading && <p className="auth-switch">Loading products...</p>}
         {error && <p className="auth-error">{error}</p>}
