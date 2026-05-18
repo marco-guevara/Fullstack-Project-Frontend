@@ -15,7 +15,7 @@ function OrderSuccessPage() {
         <div className="order-success-copy">
           <p className="eyebrow">Order Success</p>
           <h1 id="order-success-title">Thank you.</h1>
-          <p>Your order has been received and the cart is ready for your next edit.</p>
+          <p>Your order has been received and the cart is ready for your next purchase.</p>
         </div>
 
         <div className="order-reference">
