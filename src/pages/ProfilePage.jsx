@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Mail, MapPin, Phone, Save, UserRound } from 'lucide-react'
-import AppFooter from '../components/AppFooter.jsx'
-import AppNav from '../components/AppNav.jsx'
+import AppLayout from '../components/AppLayout.jsx'
+import FormMessage from '../components/FormMessage.jsx'
+import PageHeader from '../components/PageHeader.jsx'
 import { useAuth } from '../context/useAuth.js'
 
 function getInitialProfileData(user) {
@@ -49,19 +50,14 @@ function ProfilePage() {
   }
 
   return (
-    <main className="app">
-      <AppNav />
+    <AppLayout>
       <section className="profile-page" aria-labelledby="profile-title">
-        <header className="shop-header">
-          <div>
-            <p className="eyebrow">Account</p>
-            <h1 id="profile-title">Profile</h1>
-          </div>
+        <PageHeader eyebrow="Account" title="Profile" titleId="profile-title">
           <p className="profile-email">
             <Mail aria-hidden="true" size={16} strokeWidth={1.8} />
             {user?.email}
           </p>
-        </header>
+        </PageHeader>
 
         <div className="profile-layout">
           <aside className="profile-summary" aria-label="Account summary">
@@ -150,8 +146,8 @@ function ProfilePage() {
               </span>
             </div>
 
-            {error && <p className="auth-error">{error}</p>}
-            {message && <p className="auth-switch">{message}</p>}
+            <FormMessage tone="error">{error}</FormMessage>
+            <FormMessage>{message}</FormMessage>
 
             <button type="submit" disabled={isSaving}>
               <Save aria-hidden="true" size={16} strokeWidth={1.8} />
@@ -160,8 +156,7 @@ function ProfilePage() {
           </form>
         </div>
       </section>
-      <AppFooter />
-    </main>
+    </AppLayout>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
+import FormMessage from '../components/FormMessage.jsx'
 import AuthField from '../components/auth/AuthField.jsx'
 import AuthLayout from '../components/auth/AuthLayout.jsx'
 import AuthSubmitButton from '../components/auth/AuthSubmitButton.jsx'
@@ -73,7 +74,7 @@ function LoginPage() {
           onChange={handleChange}
           required
         />
-        {error && <p className="auth-error">{error}</p>}
+        <FormMessage tone="error">{error}</FormMessage>
         <AuthSubmitButton
           isSubmitting={isSubmitting}
           idleText="Enter"

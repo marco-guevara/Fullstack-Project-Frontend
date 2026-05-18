@@ -1,8 +1,9 @@
 import { Minus, Plus, ReceiptText, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import AppFooter from '../components/AppFooter.jsx'
-import AppNav from '../components/AppNav.jsx'
+import AppLayout from '../components/AppLayout.jsx'
+import FormMessage from '../components/FormMessage.jsx'
+import PageHeader from '../components/PageHeader.jsx'
 import {
   getCart,
   removeCartItem,
@@ -99,19 +100,14 @@ function CartPage() {
   }
 
   return (
-    <main className="app">
-      <AppNav />
+    <AppLayout>
       <section className="cart-page" aria-labelledby="cart-title">
-        <header className="shop-header">
-          <div>
-            <p className="eyebrow">Private Selection</p>
-            <h1 id="cart-title">Cart</h1>
-          </div>
+        <PageHeader eyebrow="Private Selection" title="Cart" titleId="cart-title">
           <Link to="/shop">Shop</Link>
-        </header>
+        </PageHeader>
 
-        {isLoading && <p className="auth-switch">Loading cart...</p>}
-        {error && <p className="auth-error">{error}</p>}
+        <FormMessage>{isLoading && 'Loading cart...'}</FormMessage>
+        <FormMessage tone="error">{error}</FormMessage>
 
         {!isLoading && !error && items.length === 0 && (
           <div className="empty-state">
@@ -201,8 +197,7 @@ function CartPage() {
           </div>
         )}
       </section>
-      <AppFooter />
-    </main>
+    </AppLayout>
   )
 }
 

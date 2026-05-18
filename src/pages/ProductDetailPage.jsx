@@ -1,8 +1,8 @@
 import { Boxes, Palette, Ruler } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import AppFooter from '../components/AppFooter.jsx'
-import AppNav from '../components/AppNav.jsx'
+import AppLayout from '../components/AppLayout.jsx'
+import FormMessage from '../components/FormMessage.jsx'
 import { addCartItem } from '../services/cartService.js'
 import { getProductById } from '../services/productService.js'
 
@@ -85,8 +85,7 @@ function ProductDetailPage() {
   }
 
   return (
-    <main className="app">
-      <AppNav />
+    <AppLayout>
       <section className="product-detail-page" aria-labelledby="product-title">
         <div className="detail-actions">
           <Link className="back-link" to="/shop">
@@ -97,8 +96,8 @@ function ProductDetailPage() {
           </Link>
         </div>
 
-        {isLoading && <p className="auth-switch">Loading product...</p>}
-        {productError && <p className="auth-error">{productError}</p>}
+        <FormMessage>{isLoading && 'Loading product...'}</FormMessage>
+        <FormMessage tone="error">{productError}</FormMessage>
 
         {!isLoading && !productError && product && (
           <article className="product-detail">
@@ -181,8 +180,8 @@ function ProductDetailPage() {
                   />
                 </label>
 
-                {cartMessage && <p className="auth-switch">{cartMessage}</p>}
-                {cartError && <p className="auth-error">{cartError}</p>}
+                <FormMessage>{cartMessage}</FormMessage>
+                <FormMessage tone="error">{cartError}</FormMessage>
 
                 <button type="submit" disabled={isAddingToCart || product.stock < 1}>
                   {isAddingToCart ? 'Adding...' : 'Add to Cart'}
@@ -199,8 +198,7 @@ function ProductDetailPage() {
           </article>
         )}
       </section>
-      <AppFooter />
-    </main>
+    </AppLayout>
   )
 }
 
