@@ -1,0 +1,130 @@
+@media (max-width: 760px) {
+  .app-nav {
+    align-items: center;
+  }
+
+  .app-nav .app-nav-menu-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .app-nav-menu {
+    position: absolute;
+    top: 100%;
+    right: var(--page-gutter);
+    left: var(--page-gutter);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    border: 1px solid var(--color-line);
+    padding: 1.25rem;
+    background: rgba(247, 247, 244, 0.98);
+    box-shadow: 0 18px 40px rgba(13, 13, 12, 0.12);
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    visibility: hidden;
+    transition:
+      opacity 220ms ease,
+      transform 220ms ease,
+      visibility 220ms ease;
+  }
+
+  .app-nav-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .app-nav-menu a,
+  .app-nav-menu button {
+    justify-content: flex-start;
+  }
+
+  .app-footer {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 1.5rem;
+    padding: 2rem var(--page-gutter);
+  }
+
+  .app-footer nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(96px, 1fr));
+    justify-content: stretch;
+    gap: 0.85rem 1.25rem;
+    width: 100%;
+  }
+
+  .app-footer > a {
+    justify-self: start;
+    border-top: 1px solid var(--color-line-soft);
+    width: 100%;
+    padding-top: 1rem;
+  }
+
+  .page-header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .product-detail {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .profile-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .profile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .add-to-cart-form {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item {
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .cart-item-total {
+    grid-column: 2;
+  }
+
+  .auth-gateway {
+    min-height: 100svh;
+    background: var(--color-ink);
+  }
+
+  .auth-gateway::before {
+    background:
+      linear-gradient(90deg, rgba(13, 13, 12, 0.82), rgba(13, 13, 12, 0.12)),
+      url('../assets/hero-apparel.png') 68% center / cover;
+  }
+
+  .auth-actions {
+    width: 100%;
+  }
+
+  .auth-actions a {
+    flex: 1 1 100%;
+  }
+
+  .auth-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-panel-header {
+    min-height: 280px;
+  }
+}

@@ -29,7 +29,7 @@ function ShopPage() {
     <AppLayout>
       <section className="shop-page" aria-labelledby="shop-title">
         <PageHeader eyebrow="Collections / 2026" title="Shop" titleId="shop-title">
-          <div className="shop-header-meta">
+          <div className="page-header-meta">
             <p>{products.length} items</p>
           </div>
         </PageHeader>

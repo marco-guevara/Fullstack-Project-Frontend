@@ -50,7 +50,7 @@ function LoginPage() {
       title="Login"
       titleId="login-title"
       footer={
-        <p className="auth-switch">
+        <p className="muted-text">
           New to Baldo? <Link to="/register">Create account</Link>
         </p>
       }

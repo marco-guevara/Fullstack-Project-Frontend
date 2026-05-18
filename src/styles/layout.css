@@ -1,0 +1,136 @@
+.app {
+  min-height: 100vh;
+  background: var(--color-surface-warm);
+  color: var(--color-ink);
+}
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-line);
+  padding: 1rem var(--page-gutter);
+  background: rgba(247, 247, 244, 0.94);
+  backdrop-filter: blur(12px);
+}
+
+.app-nav-brand,
+.app-nav a,
+.app-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.app-nav-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.85rem;
+}
+
+.app-nav .app-nav-menu-button {
+  display: none;
+}
+
+.app-nav button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  transition: opacity var(--transition-smooth);
+}
+
+.app-nav a {
+  transition: opacity var(--transition-smooth);
+}
+
+.app-nav a:hover,
+.app-nav button:hover {
+  opacity: 0.58;
+}
+
+.app-nav-link {
+  position: relative;
+  padding-bottom: 0.15rem;
+}
+
+.app-nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: -0.25rem;
+  left: 0;
+  height: 1px;
+  background: var(--color-line);
+  content: '';
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition:
+    opacity var(--transition-smooth),
+    transform var(--transition-smooth);
+}
+
+.app-nav-link.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.app-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 1px solid var(--color-line);
+  padding: 2rem var(--page-gutter);
+  background: var(--color-surface);
+}
+
+.app-footer p {
+  margin: 0;
+}
+
+.app-footer-brand {
+  color: var(--color-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.app-footer p:not(.app-footer-brand),
+.app-footer a {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.app-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.app-footer > a {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.4rem;
+}
+
+.app-footer a:hover {
+  color: var(--color-ink);
+}

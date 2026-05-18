@@ -87,11 +87,11 @@ function ProductDetailPage() {
   return (
     <AppLayout>
       <section className="product-detail-page" aria-labelledby="product-title">
-        <div className="detail-actions">
-          <Link className="back-link" to="/shop">
+        <div className="product-detail-links">
+          <Link className="text-link" to="/shop">
             Back to shop
           </Link>
-          <Link className="back-link" to="/cart">
+          <Link className="text-link" to="/cart">
             Cart
           </Link>
         </div>
@@ -135,7 +135,7 @@ function ProductDetailPage() {
                 </div>
               </dl>
 
-              <form className="cart-form" onSubmit={handleAddToCart}>
+              <form className="add-to-cart-form" onSubmit={handleAddToCart}>
                 {product.sizes?.length > 0 && (
                   <label>
                     Size

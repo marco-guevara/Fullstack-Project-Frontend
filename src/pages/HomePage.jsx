@@ -8,9 +8,9 @@ function HomePage() {
   return (
     <AppLayout>
       <section className="auth-gateway" aria-label="Baldo private home">
-        <p className="eyebrow">Private Archive</p>
+        <p className="eyebrow">Your Urban Wardrobe</p>
         <h1>Home</h1>
-        <p className="auth-switch">{user?.email}</p>
+        <p className="muted-text">{user?.email}</p>
         <div className="auth-actions">
           <Link to="/shop">Shop</Link>
           <Link to="/cart">Cart</Link>

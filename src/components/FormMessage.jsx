@@ -3,7 +3,9 @@ function FormMessage({ children, tone = 'neutral' }) {
     return null
   }
 
-  const className = tone === 'error' ? 'auth-error' : 'auth-switch'
+  const className = tone === 'error'
+    ? 'form-message form-message-error'
+    : 'form-message'
 
   return <p className={className}>{children}</p>
 }
