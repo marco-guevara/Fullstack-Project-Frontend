@@ -19,6 +19,23 @@ function ProductDetailPage() {
   const [isAddingToCart, setIsAddingToCart] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
+  function buildCartPayload() {
+    const payload = {
+      productId: product?.productId || productId,
+      quantity: Math.max(1, Number(quantity) || 1),
+    }
+
+    if (product?.sizes?.length > 0) {
+      payload.selectedSize = selectedSize || product.sizes[0]
+    }
+
+    if (product?.colors?.length > 0) {
+      payload.selectedColor = selectedColor || product.colors[0]
+    }
+
+    return payload
+  }
+
   useEffect(() => {
     async function loadProduct() {
       try {
@@ -48,12 +65,7 @@ function ProductDetailPage() {
     setIsAddingToCart(true)
 
     try {
-      await addCartItem({
-        productId: product.productId,
-        quantity,
-        selectedSize,
-        selectedColor,
-      })
+      await addCartItem(buildCartPayload())
       setCartMessage('Product added to cart.')
       return true
     } catch (cartError) {
