@@ -1,7 +1,8 @@
-import { Minus, Plus, ReceiptText, Trash2 } from 'lucide-react'
+import { Minus, Plus, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AppLayout from '../components/AppLayout.jsx'
+import CartSummary from '../components/CartSummary.jsx'
 import FormMessage from '../components/FormMessage.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import {
@@ -167,33 +168,14 @@ function CartPage() {
               ))}
             </div>
 
-            <aside className="cart-summary">
-              <p className="eyebrow">Summary</p>
-              <h2>
-                <ReceiptText aria-hidden="true" size={18} strokeWidth={1.8} />
-                {totalItems} Items
-              </h2>
-              <div className="summary-line">
-                <span>Subtotal</span>
-                <strong>{currencyFormatter.format(subtotal)}</strong>
-              </div>
-              <div className="summary-line">
-                <span>Tax</span>
-                <strong>{currencyFormatter.format(tax)}</strong>
-              </div>
-              <div className="summary-line summary-line-total">
-                <span>Total</span>
-                <strong>{currencyFormatter.format(total)}</strong>
-              </div>
-              <button
-                className="checkout-button"
-                type="button"
-                disabled={isCheckingOut}
-                onClick={handleCheckout}
-              >
-                {isCheckingOut ? 'Checking out...' : 'Checkout'}
-              </button>
-            </aside>
+            <CartSummary
+              totalItems={totalItems}
+              subtotal={subtotal}
+              tax={tax}
+              total={total}
+              isCheckingOut={isCheckingOut}
+              onCheckout={handleCheckout}
+            />
           </div>
         )}
       </section>
