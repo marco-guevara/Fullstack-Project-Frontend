@@ -1,4 +1,3 @@
-import { SlidersHorizontal } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AppLayout from '../components/AppLayout.jsx'
@@ -8,7 +7,6 @@ import { getProducts } from '../services/productService.js'
 
 function ShopPage() {
   const [products, setProducts] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState('All')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
 
@@ -27,28 +25,12 @@ function ShopPage() {
     loadProducts()
   }, [])
 
-  const productCategories = products
-    .map((product) => product.category || 'Uncategorized')
-    .filter(Boolean)
-
-  const categories = ['All', ...new Set(productCategories)]
-
-  const visibleProducts = selectedCategory === 'All'
-    ? products
-    : products.filter((product) => (
-      (product.category || 'Uncategorized') === selectedCategory
-    ))
-
   return (
     <AppLayout>
       <section className="shop-page" aria-labelledby="shop-title">
         <PageHeader eyebrow="Collections / 2026" title="Shop" titleId="shop-title">
           <div className="shop-header-meta">
-            <span>
-              <SlidersHorizontal aria-hidden="true" size={14} strokeWidth={1.8} />
-              Filters
-            </span>
-            <p>{visibleProducts.length} items</p>
+            <p>{products.length} items</p>
           </div>
         </PageHeader>
 
@@ -56,39 +38,24 @@ function ShopPage() {
         <FormMessage tone="error">{error}</FormMessage>
 
         {!isLoading && !error && (
-          <>
-            <div className="category-filters" aria-label="Product categories">
-              {categories.map((category) => (
-                <button
-                  className={category === selectedCategory ? 'active' : ''}
-                  key={category}
-                  type="button"
-                  onClick={() => setSelectedCategory(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-
-            <div className="product-grid">
-              {visibleProducts.map((product) => (
-                <Link
-                  className="product-card"
-                  key={product.productId}
-                  to={`/products/${product.productId}`}
-                >
-                  <div className="product-image">
-                    {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
-                  </div>
-                  <div className="product-info">
-                    <p>{product.category || 'Uncategorized'}</p>
-                    <h2>{product.name}</h2>
-                    <span>{Number(product.price).toFixed(2)} EUR</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </>
+          <div className="product-grid">
+            {products.map((product) => (
+              <Link
+                className="product-card"
+                key={product.productId}
+                to={`/products/${product.productId}`}
+              >
+                <div className="product-image">
+                  {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
+                </div>
+                <div className="product-info">
+                  <p>{product.category || 'Uncategorized'}</p>
+                  <h2>{product.name}</h2>
+                  <span>{Number(product.price).toFixed(2)} EUR</span>
+                </div>
+              </Link>
+            ))}
+          </div>
         )}
       </section>
     </AppLayout>
