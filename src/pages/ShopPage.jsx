@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import AppLayout from '../components/AppLayout.jsx'
 import FormMessage from '../components/FormMessage.jsx'
 import PageHeader from '../components/PageHeader.jsx'
+import ProductCard from '../components/ProductCard.jsx'
 import { getProducts } from '../services/productService.js'
 
 function ShopPage() {
@@ -40,20 +40,7 @@ function ShopPage() {
         {!isLoading && !error && (
           <div className="product-grid">
             {products.map((product) => (
-              <Link
-                className="product-card"
-                key={product.productId}
-                to={`/products/${product.productId}`}
-              >
-                <div className="product-image">
-                  {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
-                </div>
-                <div className="product-info">
-                  <p>{product.category || 'Uncategorized'}</p>
-                  <h2>{product.name}</h2>
-                  <span>{Number(product.price).toFixed(2)} EUR</span>
-                </div>
-              </Link>
+              <ProductCard key={product.productId} product={product} />
             ))}
           </div>
         )}
