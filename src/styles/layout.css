@@ -1,4 +1,6 @@
 .app {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: var(--color-surface-warm);
   color: var(--color-ink);
@@ -86,6 +88,7 @@
 }
 
 .app-footer {
+  margin-top: auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
