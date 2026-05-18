@@ -2,6 +2,7 @@ import { Minus, Plus, ReceiptText, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AppLayout from '../components/AppLayout.jsx'
+import FormMessage from '../components/FormMessage.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import {
   getCart,
@@ -105,8 +106,8 @@ function CartPage() {
           <Link to="/shop">Shop</Link>
         </PageHeader>
 
-        {isLoading && <p className="auth-switch">Loading cart...</p>}
-        {error && <p className="auth-error">{error}</p>}
+        <FormMessage>{isLoading && 'Loading cart...'}</FormMessage>
+        <FormMessage tone="error">{error}</FormMessage>
 
         {!isLoading && !error && items.length === 0 && (
           <div className="empty-state">

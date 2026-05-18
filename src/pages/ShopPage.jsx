@@ -2,6 +2,7 @@ import { SlidersHorizontal } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AppLayout from '../components/AppLayout.jsx'
+import FormMessage from '../components/FormMessage.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import { getProducts } from '../services/productService.js'
 
@@ -53,8 +54,8 @@ function ShopPage() {
           </div>
         </PageHeader>
 
-        {isLoading && <p className="auth-switch">Loading products...</p>}
-        {error && <p className="auth-error">{error}</p>}
+        <FormMessage>{isLoading && 'Loading products...'}</FormMessage>
+        <FormMessage tone="error">{error}</FormMessage>
 
         {!isLoading && !error && (
           <>

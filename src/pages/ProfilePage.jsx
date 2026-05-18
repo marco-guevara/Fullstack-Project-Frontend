@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Mail, MapPin, Phone, Save, UserRound } from 'lucide-react'
 import AppLayout from '../components/AppLayout.jsx'
+import FormMessage from '../components/FormMessage.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import { useAuth } from '../context/useAuth.js'
 
@@ -145,8 +146,8 @@ function ProfilePage() {
               </span>
             </div>
 
-            {error && <p className="auth-error">{error}</p>}
-            {message && <p className="auth-switch">{message}</p>}
+            <FormMessage tone="error">{error}</FormMessage>
+            <FormMessage>{message}</FormMessage>
 
             <button type="submit" disabled={isSaving}>
               <Save aria-hidden="true" size={16} strokeWidth={1.8} />
