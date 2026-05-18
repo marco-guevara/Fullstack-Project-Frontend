@@ -1,9 +1,5 @@
 import { ReceiptText } from 'lucide-react'
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'EUR',
-})
+import { currencyFormatter } from '../utils/currencyFormatter.js'
 
 function CartSummary({
   totalItems,
