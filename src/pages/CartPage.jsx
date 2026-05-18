@@ -1,8 +1,7 @@
 import { Minus, Plus, ReceiptText, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import AppFooter from '../components/AppFooter.jsx'
-import AppNav from '../components/AppNav.jsx'
+import AppLayout from '../components/AppLayout.jsx'
 import {
   getCart,
   removeCartItem,
@@ -99,8 +98,7 @@ function CartPage() {
   }
 
   return (
-    <main className="app">
-      <AppNav />
+    <AppLayout>
       <section className="cart-page" aria-labelledby="cart-title">
         <header className="shop-header">
           <div>
@@ -201,8 +199,7 @@ function CartPage() {
           </div>
         )}
       </section>
-      <AppFooter />
-    </main>
+    </AppLayout>
   )
 }
 

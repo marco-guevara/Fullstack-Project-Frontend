@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Mail, MapPin, Phone, Save, UserRound } from 'lucide-react'
-import AppFooter from '../components/AppFooter.jsx'
-import AppNav from '../components/AppNav.jsx'
+import AppLayout from '../components/AppLayout.jsx'
 import { useAuth } from '../context/useAuth.js'
 
 function getInitialProfileData(user) {
@@ -49,8 +48,7 @@ function ProfilePage() {
   }
 
   return (
-    <main className="app">
-      <AppNav />
+    <AppLayout>
       <section className="profile-page" aria-labelledby="profile-title">
         <header className="shop-header">
           <div>
@@ -160,8 +158,7 @@ function ProfilePage() {
           </form>
         </div>
       </section>
-      <AppFooter />
-    </main>
+    </AppLayout>
   )
 }
 
