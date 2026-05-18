@@ -1,5 +1,5 @@
 import { SlidersHorizontal } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AppLayout from '../components/AppLayout.jsx'
 import FormMessage from '../components/FormMessage.jsx'
@@ -27,13 +27,11 @@ function ShopPage() {
     loadProducts()
   }, [])
 
-  const categories = useMemo(() => {
-    const productCategories = products
-      .map((product) => product.category || 'Uncategorized')
-      .filter(Boolean)
+  const productCategories = products
+    .map((product) => product.category || 'Uncategorized')
+    .filter(Boolean)
 
-    return ['All', ...new Set(productCategories)]
-  }, [products])
+  const categories = ['All', ...new Set(productCategories)]
 
   const visibleProducts = selectedCategory === 'All'
     ? products
