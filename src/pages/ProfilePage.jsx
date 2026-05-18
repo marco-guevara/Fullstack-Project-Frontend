@@ -1,0 +1,163 @@
+import { useState } from "react";
+import { Mail, MapPin, Phone, Save, UserRound } from "lucide-react";
+import AppLayout from "../components/AppLayout.jsx";
+import FormMessage from "../components/FormMessage.jsx";
+import PageHeader from "../components/PageHeader.jsx";
+import { useAuth } from "../context/useAuth.js";
+
+function getInitialProfileData(user) {
+  return {
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
+    address: user?.address || "",
+    city: user?.city || "",
+    postalCode: user?.postalCode || "",
+    country: user?.country || "",
+    phone: user?.phone || "",
+  };
+}
+
+function ProfilePage() {
+  const { updateProfile, user } = useAuth();
+  const [formData, setFormData] = useState(() => getInitialProfileData(user));
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setFormData((currentData) => ({
+      ...currentData,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setError("");
+    setMessage("");
+    setIsSaving(true);
+
+    try {
+      await updateProfile(formData);
+      setMessage("Profile updated.");
+    } catch (profileError) {
+      setError(profileError.message);
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  return (
+    <AppLayout>
+      <section className="profile-page" aria-labelledby="profile-title">
+        <PageHeader eyebrow="Account" title="Profile" titleId="profile-title">
+          <p className="profile-email">
+            <Mail aria-hidden="true" size={16} strokeWidth={1.8} />
+            {user?.email}
+          </p>
+        </PageHeader>
+
+        <div className="profile-layout">
+          <aside className="profile-summary" aria-label="Account summary">
+            <div>
+              <UserRound aria-hidden="true" size={22} strokeWidth={1.6} />
+              <span>Customer Profile</span>
+            </div>
+            <p>
+              Keep your delivery details updated before completing checkout.
+            </p>
+          </aside>
+
+          <form className="profile-form" onSubmit={handleSubmit}>
+            <label>
+              First name
+              <input
+                name="firstName"
+                type="text"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Last name
+              <input
+                name="lastName"
+                type="text"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Address
+              <input
+                name="address"
+                type="text"
+                value={formData.address}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              City
+              <input
+                name="city"
+                type="text"
+                value={formData.city}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Postal code
+              <input
+                name="postalCode"
+                type="text"
+                value={formData.postalCode}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Country
+              <input
+                name="country"
+                type="text"
+                value={formData.country}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Phone
+              <input
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </label>
+
+            <div className="profile-contact-notes" aria-hidden="true">
+              <span>
+                <MapPin size={15} strokeWidth={1.8} />
+                <p>Delivery address</p>
+              </span>
+              <span>
+                <Phone size={15} strokeWidth={1.8} />
+                <p>Contact details</p>
+              </span>
+            </div>
+
+            <FormMessage tone="error">{error}</FormMessage>
+            <FormMessage>{message}</FormMessage>
+
+            <button type="submit" disabled={isSaving}>
+              <Save aria-hidden="true" size={16} strokeWidth={1.8} />
+              {isSaving ? "Saving..." : "Save Profile"}
+            </button>
+          </form>
+        </div>
+      </section>
+    </AppLayout>
+  );
+}
+
+export default ProfilePage;
